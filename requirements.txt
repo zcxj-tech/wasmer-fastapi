@@ -1,0 +1,7 @@
+SQLAlchemy>=2.0.0
+requests
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+pymysql
