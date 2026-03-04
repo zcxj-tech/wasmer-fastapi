@@ -11,9 +11,18 @@ import platform
 import sys
 import os
 
+
+name = os.getenv("DB_NAME", "todos")
+user = os.getenv("DB_USERNAME", "root")
+password = os.getenv("DB_PASSWORD", "")
+host = os.getenv("DB_HOST", "127.0.0.1")
+port = os.getenv("DB_PORT", "3306")
+db_url = f"mysql+pymysql://{user}{':' + quote_plus(password) if password else ''}@{host}:{port}/{name}"
+
 # 创建数据库引擎
 # 注意：请根据实际情况修改数据库连接信息
-engine = create_engine('mysql+pymysql://7f15cb037e488000736360c22b98:069a7f15-cb03-7f73-8000-544e52597658@db.fr-pari1.bengt.wasmernet.com:10272/wasmer_fastapi')
+#engine = create_engine('mysql+pymysql://7f15cb037e488000736360c22b98:069a7f15-cb03-7f73-8000-544e52597658@db.fr-pari1.bengt.wasmernet.com:10272/wasmer_fastapi')
+engine = create_engine(db_url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
